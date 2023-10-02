@@ -14,4 +14,4 @@ access_log = True
 reload = True
 
 # Specify the application instance
-app = "app.main:app"
+app = "appserver.main:app"

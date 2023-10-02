@@ -1,11 +1,6 @@
 from fastapi import APIRouter, HTTPException, Body
 from typing import List, Dict
-from pydantic import BaseModel
-
-class User(BaseModel):
-    username : str
-    email : str
-    full_name: str
+from schemas.user import User
 
 users_db : Dict[int, User] = {}
 
@@ -26,6 +21,7 @@ async def read_user(user_id : int):
     
     return user
 
+#TODO Fix Errors
 @router.get("/userlist", response_model=List[User])
 async def list_users():
     return list(users_db.values())
@@ -45,5 +41,4 @@ async def delete_user(user_id : int):
     user = users_db.get(user_id)
     if user is None :
         raise HTTPException(status_code=404, detail="User not found")
-
     return user
